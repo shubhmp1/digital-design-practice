@@ -2,7 +2,7 @@
 
 A collection of digital design labs and problems focused on RTL design, computer architecture, and verification using SystemVerilog.
 
-Currently working through a RISC-V-focused digital design course, implementing and simulating each module from scratch, then verifying it against self-checking testbenches in Vivado. Practice problems will be added as I go.
+Currently working through **[The Complete SystemVerilog For Digital Design and Synthesis](https://www.udemy.com/)** on Udemy — a lab-driven course building a 32-bit RISC-V SoC from scratch in synthesizable SystemVerilog. Implementing and simulating each module myself, then verifying it against self-checking testbenches in Vivado. Practice problems will be added as I go.
 
 ## Topics
 
@@ -20,4 +20,4 @@ Each folder contains one lab or module, including the source file(s), testbench,
 
 ## Status
 
-🚧 Actively working through labs — more topics (FSMs, pipelining, memory/caches, hardware interview problems) will be added as I progress.
+🚧 Actively working through the course labs — more topics (FSMs, pipelining, memory/caches, hardware interview problems) will be added as I progress.
