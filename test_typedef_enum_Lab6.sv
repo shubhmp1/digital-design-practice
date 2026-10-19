@@ -1,9 +1,7 @@
 module test_typedef_enum;
-    // Time scale and precision
     timeunit 1ns; timeprecision 100ps;
     import tb_utils_pkg::*;
 
-    // Test signals
     logic [6:0] opcode_in;
     logic [3:0] alu_op_in;
     logic [6:0] opcode_out;
@@ -16,7 +14,6 @@ module test_typedef_enum;
     logic       exp_valid_opcode;
     logic       exp_valid_alu_op;
 
-    // Import the enum types from the module we're testing - RISC-V opcodes
     typedef enum logic [6:0] {
         OPCODE_LOAD       = 7'b0000011,
         OPCODE_STORE      = 7'b0100011,
@@ -27,7 +24,6 @@ module test_typedef_enum;
         OPCODE_BRANCH     = 7'b1100011
     } opcode_t;
 
-    // RISC-V ALU Operations
     typedef enum logic [3:0] {
         ALU_ADD = 4'b0000,
         ALU_SUB = 4'b0001,
@@ -40,10 +36,8 @@ module test_typedef_enum;
         ALU_SRA = 4'b1000
     } alu_op_t;
 
-    // Instantiate the decoder module
     typedef_enum dut (.*);
 
-    // Check results task
     task automatic check_result(string test_name, logic exp_valid_opcode, logic exp_valid_alu_op);
         test_count++;
         
@@ -57,11 +51,9 @@ module test_typedef_enum;
         end
     endtask
 
-    // Test stimulus
     initial begin
         $display("\nStarting RISC-V Decoder Testbench");
 
-        // Test all valid opcodes with a valid ALU operation
         opcode_in = OPCODE_LOAD;
         alu_op_in = ALU_ADD;
         #1 check_result("Valid LOAD + ADD", 1'b1, 1'b1);
@@ -90,7 +82,6 @@ module test_typedef_enum;
         alu_op_in = ALU_SLT;
         #1 check_result("Valid BRANCH + SLT", 1'b1, 1'b1);
 
-        // Test invalid opcodes
         opcode_in = 7'b1111111;
         alu_op_in = ALU_ADD;
         #1 check_result("Invalid opcode + valid ALU", 1'b0, 1'b1);
@@ -99,7 +90,6 @@ module test_typedef_enum;
         alu_op_in = ALU_ADD;
         #1 check_result("Invalid opcode + valid ALU", 1'b0, 1'b1);
 
-        // Test invalid ALU operations
         opcode_in = OPCODE_R_TYPE;
         alu_op_in = 4'b1111;
         #1 check_result("Valid opcode + invalid ALU", 1'b1, 1'b0);
@@ -108,7 +98,6 @@ module test_typedef_enum;
         alu_op_in = 4'b1001;
         #1 check_result("Valid opcode + invalid ALU", 1'b1, 1'b0);
 
-        // Test all ALU operations with a valid opcode
         opcode_in = OPCODE_R_TYPE;
         alu_op_in = ALU_ADD;
         #1 check_result("R_TYPE + ADD", 1'b1, 1'b1);
@@ -137,19 +126,16 @@ module test_typedef_enum;
         alu_op_in = ALU_SRA;
         #1 check_result("R_TYPE + SRA", 1'b1, 1'b1);
 
-        // Test both invalid opcode and invalid ALU op
         opcode_in = 7'b1010101;
         alu_op_in = 4'b1111;
         #1 check_result("Invalid opcode + invalid ALU", 1'b0, 1'b0);
 
-        // Random tests
         $display("\nRunning 20 random tests...");
         for (int i = 0; i < 20; i++) begin
             opcode_in = $urandom;
             alu_op_in = $urandom;
             #1;
             
-            // Calculate expected results based on module logic
             exp_valid_opcode = (opcode_in == OPCODE_LOAD || 
                                      opcode_in == OPCODE_STORE ||
                                      opcode_in == OPCODE_R_TYPE ||
