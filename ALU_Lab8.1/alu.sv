@@ -1,23 +1,6 @@
-/*******************************************************************************
- * Module: memory
- * 
- * File Name: memory.sv
- * Project: TRIX-V (Tiny RISC-V Core)
- *
- * Description:
- *     Arithmetic Logic Unit
- *
- *
- * Modification History:
- * Ver   Who    Date        Changes
- * ----  -----  ----------  -----------------------------------------------
- * 1.0   
- *
- * Copyright (c) AICLAB. All rights reserved.
- *******************************************************************************/
+
 module alu 
-    // Import the typedefs package
-    /*---ADD CODE HERE---*/
+
     import typedefs::*;
  #(
     parameter WIDTH = 32
@@ -30,12 +13,9 @@ module alu
     output logic             less_o
 );
 
-    // Implement the ALU functionality
     always_comb begin
         case (alu_op_i)
-            // Complete the case statement with the operations
-            // from the table above
-            /*---ADD CODE HERE---*/
+
             ALU_ADD: result_o = a_i+b_i;
             ALU_SUB: result_o = a_i-b_i;
             ALU_AND: result_o = a_i&b_i;
@@ -50,8 +30,6 @@ module alu
         endcase
     end
 
-    // Assign zero and less flags
-    /*---ADD CODE HERE---*/
     assign zero_o = (result_o == '0);
     assign less_o = signed'(a_i)<signed'(b_i) ? 1:0;
 
