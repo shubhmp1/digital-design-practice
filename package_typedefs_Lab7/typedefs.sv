@@ -1,25 +1,6 @@
-/*******************************************************************************
- * Module: typedefs
- * 
- * File Name: typedefs.sv
- * Project: TRIX-V (Tiny RISC-V Core)
- *
- * Description:
- *     Type definitions and enum declarations for RISC-V opcodes and ALU operations
- *
- * Modification History:
- * Ver   Who    Date        Changes
- * ----  -----  ----------  -----------------------------------------------
- * 1.0   
- *
- * Copyright (c) AICLAB. All rights reserved.
- *******************************************************************************/
-package typedefs;
-    // Time scale and precision
-    timeunit 1ns; timeprecision 100ps;
 
-    // RISC-V ALU Operation Codes
-    // Import the enum types from the module we're testing - RISC-V opcodes
+package typedefs;
+    timeunit 1ns; timeprecision 100ps;
         typedef enum logic [6:0] {
             OPCODE_LOAD       = 7'b0000011,
             OPCODE_STORE      = 7'b0100011,
@@ -30,8 +11,6 @@ package typedefs;
             OPCODE_BRANCH     = 7'b1100011
         } opcode_t;
 
-    // RISC-V opcode
-    // RISC-V ALU Operations
         typedef enum logic [3:0] {
             ALU_ADD = 4'b0000,
             ALU_SUB = 4'b0001,
