@@ -1,21 +1,18 @@
 module package_typedef_enum 
     import typedefs::*;
 (
-    input  logic [6:0] opcode_in,    // Raw opcode input
-    input  logic [3:0] alu_op_in,    // Raw ALU operation input
-    output logic [6:0] opcode_out,   // Decoded opcode
-    output logic [3:0] alu_op_out,   // Decoded ALU operation
-    output logic       valid_opcode,  // Indicates if opcode is valid
-    output logic       valid_alu_op   // Indicates if ALU operation is valid
+    input  logic [6:0] opcode_in,
+    input  logic [3:0] alu_op_in,
+    output logic [6:0] opcode_out,
+    output logic [3:0] alu_op_out,
+    output logic       valid_opcode,
+    output logic       valid_alu_op
 );
-    // Time scale and precision
     timeunit 1ns; timeprecision 100ps;
-
-    // Pass through the inputs
+    
     assign opcode_out = opcode_in;
     assign alu_op_out = alu_op_in;
 
-    // Validate opcode
     always_comb begin
         valid_opcode = 1'b0;
         case (opcode_in)
@@ -30,7 +27,6 @@ module package_typedef_enum
         endcase
     end
 
-    // Validate ALU operation
     always_comb begin
         valid_alu_op = 1'b0;
         case (alu_op_in)
